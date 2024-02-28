@@ -3,6 +3,7 @@ from django.http import HttpResponse
 from .models import Task
 from .forms import TaskForm
 from django.contrib import messages
+from django.core.paginator import Paginator
 # Create your views here.
 def helloWorld(request):
     return HttpResponse("Hello World!")
@@ -37,7 +38,14 @@ def editTask(request,id):
         return render(request, 'tasks/edittask.html',{'form': form, 'task':task})
 
 def tasksList(request):
-    tasks = Task.objects.all().order_by("-created_at")
+    tasks_list = Task.objects.all().order_by("-created_at")
+    
+    paginator = Paginator(tasks_list, 3)
+    
+    page = request.GET.get('page')
+    
+    tasks = paginator.get_page(page)
+    
     return render(request,'tasks/list.html',{'tasks':tasks})
 
 def deleteTask(request,id):
