@@ -20,6 +20,7 @@ def newTask(request):
         if form.is_valid():
             task = form.save(commit = False)
             task.done = 'doing'
+            task.user = request.user
             task.save()
             return redirect('/')
     else:
