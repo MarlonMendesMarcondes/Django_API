@@ -36,6 +36,8 @@ def editTask(request,id):
         if (form.is_valid()):
             task.save()
             return redirect('/')
+        else:
+            return render(request, 'tasks/edittask.html',{'form': form, 'task':task})
     else:
         return render(request, 'tasks/edittask.html',{'form': form, 'task':task})
 

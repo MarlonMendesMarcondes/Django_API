@@ -43,6 +43,9 @@ INSTALLED_APPS = [
     'crispy_forms',
     'crispy_bootstrap4',
     'accounts',
+    'viewflow',
+    'viewflow.workflow',
+    'pizza'
 ]
 
 MIDDLEWARE = [

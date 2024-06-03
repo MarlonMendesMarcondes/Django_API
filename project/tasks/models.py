@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth import get_user_model
+from django.contrib.auth.models import User
 STATUS = (
     ('doing', 'Doing'),
     ('done', 'Done'),
@@ -11,7 +12,7 @@ class Task(models.Model):
         max_length=5,
         choices = STATUS,
     )
-    user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='tasks_user')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
